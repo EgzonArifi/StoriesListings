@@ -1,5 +1,17 @@
-<ul class="list-group">
+<!--<ul class="list-group">
   <li class="list-group-item" *ngFor="let listing of listings">
-    <a [routerLink]="['/listing/'+listing.$key]">{{listing.title}}</a>
+    
   </li>
-</ul>
+</ul>-->
+
+<div class="container"> 
+<div *ngFor="let listing of listings">
+  <div class="row top-buffer col-md-12" >
+    <p class="col-md-10">{{listing.title}}</p>
+    <a class="col-md-1 btn btn-default" [routerLink]="['/listing/'+listing.$key]">Details</a>
+
+    <a class="btn btn-success col-md-1" [routerLink]="['/add-scenes/'+listing.$key]">Add Scene</a>
+  </div>
+<br />  <br /><br />
+</div>
+</div>

@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 @Injectable()
 export class FirebaseService {
   listings: FirebaseListObservable<any[]>;
+  sceneList: FirebaseListObservable<any[]>;
   listing: FirebaseObjectObservable<any>;
   folder: any;
 
@@ -44,7 +45,25 @@ export class FirebaseService {
       });
     }
   }
+  getScenes(id) {
+    this.sceneList = this.af.database.list('/scenes/'+id) as FirebaseListObservable<Listing[]>
+    return this.sceneList;
+  }
+  addScene(id,listing){
+    // Create root ref
+    let storageRef = firebase.storage().ref();
+    for(let selectedFile of [(<HTMLInputElement>document.getElementById('image')).files[0]]){
+      let path = `/${this.folder}/${selectedFile.name}`;
+      let iRef = storageRef.child(path);
+      iRef.put(selectedFile).then((snapshot) => {
+        listing.image = selectedFile.name;
+        listing.path = path;
+        return this.sceneList.push(listing);
+      });
+    }
+  }
 }
+
 
 interface Listing {
   $key?:string;
