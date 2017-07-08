@@ -15,6 +15,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { EditListingComponent } from './components/edit-listing/edit-listing.component';
+import { AddScenesComponent } from './components/add-scenes/add-scenes.component';
 
 
 export const firebaseConfig = {
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
  {path:'listings',component:ListingsComponent},
  {path:'listing/:id', component:ListingComponent},
  {path:'add-listing',component:AddListingComponent},
- {path:'edit-listing/:id', component:EditListingComponent}
+ {path:'edit-listing/:id', component:EditListingComponent},
+ {path:'add-scenes/:id', component:AddScenesComponent}
 ]
 
 @NgModule({
@@ -47,7 +49,9 @@ const appRoutes: Routes = [
     NavbarComponent,
     ListingComponent,
     AddListingComponent,
-    EditListingComponent
+    EditListingComponent,
+    AddScenesComponent,
+    AddScenesComponent
   ],
   imports: [
     BrowserModule,

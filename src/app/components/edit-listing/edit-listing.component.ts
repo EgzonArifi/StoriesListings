@@ -17,7 +17,7 @@ export class EditListingComponent implements OnInit {
     private firebaseService:FirebaseService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) { } 
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
