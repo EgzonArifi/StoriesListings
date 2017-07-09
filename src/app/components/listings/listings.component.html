@@ -7,10 +7,10 @@
 <div class="container"> 
 <div *ngFor="let listing of listings">
   <div class="row top-buffer col-md-12" >
-    <p class="col-md-10">{{listing.title}}</p>
-    <a class="col-md-1 btn btn-default" [routerLink]="['/listing/'+listing.$key]">Details</a>
-
-    <a class="btn btn-success col-md-1" [routerLink]="['/add-scenes/'+listing.$key]">Add Scene</a>
+    <p class="col-md-9">{{listing.title}}</p>
+    <a class="col-md-1 btn btn-default" [routerLink]="['/listing-scenes/'+listing.$key]">Details</a>
+    <a class="col-md-1 btn btn-success" [routerLink]="['/add-scenes/'+listing.$key]">Add Scene</a>
+    <a (click)="onDeleteClick(listing.$key)" class="col-md-1 btn btn-danger">Delete</a>
   </div>
 <br />  <br /><br />
 </div>
