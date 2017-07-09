@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 })
 export class ListingComponent implements OnInit {
   id:any;
+  parentStoryId:any;
   listing: any;
   imageUrl:any;
 
@@ -22,9 +23,12 @@ export class ListingComponent implements OnInit {
   ngOnInit() {
     // Get ID
     this.id = this.route.snapshot.params['id'];
+    this.parentStoryId = this.route.snapshot.params['parentId'];
+    console.log("this.parentStoryId"+this.parentStoryId);
 
-    this.firebaseService.getListingDetails(this.id).subscribe(listing => {
-      this.listing = listing;
+    this.firebaseService.getSceneDetails(this.parentStoryId, this.id).subscribe(scenes => {
+      console.log(scenes+" EgzonArifi");
+      this.listing = scenes;
 
       let storageRef = firebase.storage().ref();
       let spaceRef = storageRef.child(this.listing.path);
@@ -38,9 +42,8 @@ export class ListingComponent implements OnInit {
     });
   }
   onDeleteClick(){
-     this.firebaseService.deleteListing(this.id);
-
-     this.router.navigate(['/listings']);
+     this.firebaseService.deleteScene(this.id);
+     this.router.navigate(['/listing-scenes/',this.parentStoryId]);
    }
 
 }
