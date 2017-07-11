@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire,AuthProviders,AuthMethods, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -7,12 +7,25 @@ export class FirebaseService {
   listings: FirebaseListObservable<any[]>;
   sceneList: FirebaseListObservable<any[]>;
   listing: FirebaseObjectObservable<any>;
+  scene: FirebaseObjectObservable<any>;
   folder: any;
 
   constructor(private af: AngularFire) {
     this.listings = this.af.database.list('/listings') as FirebaseListObservable<Listing[]>
     this.folder = 'listingimages';
   }
+
+  loginWithEmail(email, password) {
+    return this.af.auth.login({
+        email: email,
+        password: password,
+      },
+      {
+        provider: AuthProviders.Password,
+        method: AuthMethods.Password,
+      });
+  }
+
 
   getListings(){
 
@@ -45,9 +58,19 @@ export class FirebaseService {
       });
     }
   }
-  getScenes(id) {
-    this.sceneList = this.af.database.list('/scenes/'+id) as FirebaseListObservable<Listing[]>
+  getScene(id) {
+    this.sceneList = this.af.database.list('/'+id) as FirebaseListObservable<Listing[]>
     return this.sceneList;
+  }
+  getSceneDetails(sceneid,id){
+    this.scene = this.af.database.object('/'+sceneid+'/'+id) as FirebaseObjectObservable<Listing>
+    return this.scene;
+  }
+  updateScene(id, scene){
+    return this.sceneList.update(id, scene);
+  }
+  deleteScene(id){
+    return this.sceneList.remove(id);
   }
   addScene(id,listing){
     // Create root ref
