@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { FirebaseService } from './services/firebase.service';
-import {FlashMessagesModule} from 'angular2-flash-messages';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,6 +16,8 @@ import { ListingComponent } from './components/listing/listing.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { EditListingComponent } from './components/edit-listing/edit-listing.component';
 import { AddScenesComponent } from './components/add-scenes/add-scenes.component';
+import { ListingScenesComponent } from './components/listing-scenes/listing-scenes.component';
+import { SinginComponent } from './components/singin/singin.component';
 
 
 export const firebaseConfig = {
@@ -35,10 +37,12 @@ const firebaseAuthConfig = {
 const appRoutes: Routes = [
  {path:'',component:HomeComponent},
  {path:'listings',component:ListingsComponent},
- {path:'listing/:id', component:ListingComponent},
+ {path:'listing/:parentId/:id', component:ListingComponent},
  {path:'add-listing',component:AddListingComponent},
- {path:'edit-listing/:id', component:EditListingComponent},
- {path:'add-scenes/:id', component:AddScenesComponent}
+ {path:'edit-listing/:parentId/:id', component:EditListingComponent},
+ {path:'add-scenes/:id', component:AddScenesComponent},
+ {path:'listing-scenes/:id', component:ListingScenesComponent},
+ {path:'login', component:SinginComponent},
 ]
 
 @NgModule({
@@ -51,7 +55,9 @@ const appRoutes: Routes = [
     AddListingComponent,
     EditListingComponent,
     AddScenesComponent,
-    AddScenesComponent
+    AddScenesComponent,
+    ListingScenesComponent,
+    SinginComponent
   ],
   imports: [
     BrowserModule,
