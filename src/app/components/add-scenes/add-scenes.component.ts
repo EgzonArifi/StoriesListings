@@ -22,7 +22,7 @@ export class AddScenesComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-    this.firebaseService.getScenes(this.id).subscribe(scenes => {
+    this.firebaseService.getScene(this.id).subscribe(scenes => {
       
       console.log(scenes);
     });
@@ -37,6 +37,7 @@ export class AddScenesComponent implements OnInit {
 
     this.firebaseService.addScene(this.id,listing);
 
-    this.router.navigate(["['/add-scenes/'+id]"]);
+    this.router.navigate(['/listing-scenes', this.id]);
+
   }
 }
