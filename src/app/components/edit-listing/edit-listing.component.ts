@@ -9,6 +9,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class EditListingComponent implements OnInit {
   id;
+  parentStoryId:any;
   title;
   description;
   image;
@@ -21,8 +22,8 @@ export class EditListingComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-
-    this.firebaseService.getListingDetails(this.id).subscribe(listing => {
+    this.parentStoryId = this.route.snapshot.params['parentId'];
+    this.firebaseService.getSceneDetails(this.parentStoryId,this.id).subscribe(listing => {
       this.title = listing.title;
       this.description = listing.description;
 
@@ -37,9 +38,9 @@ export class EditListingComponent implements OnInit {
 
     }
 
-    this.firebaseService.updateListing(this.id, listing);
+    this.firebaseService.updateScene(this.id, listing);
 
-    this.router.navigate(['/listings']);
+    this.router.navigate(['/listing-scenes',this.parentStoryId]);
   }
 
 }
