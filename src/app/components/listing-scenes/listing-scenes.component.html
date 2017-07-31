@@ -1,0 +1,15 @@
+<div class="container"> 
+<a class="btn btn-success" routerLink="/add-scenes/{{id}}" routerLinkActive="active">Add Scene</a>
+
+<br />  <br /><br />
+<div *ngFor="let listing of scenes">
+  <div class="row top-buffer col-md-12" >
+    <img class="thumbnail col-md-4" src="{{imageUrl}}">
+
+    <p class="col-md-7">{{listing.title}}</p>
+    <a class="col-md-1 btn btn-default" [routerLink]="['/listing/',id,listing.$key]">Details</a>
+      
+  </div>
+<br />  <br /><br />
+</div>
+</div>
