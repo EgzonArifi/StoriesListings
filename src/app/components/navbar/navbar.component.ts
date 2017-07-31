@@ -20,7 +20,8 @@ export class NavbarComponent implements OnInit {
   }
 
   login(){
-    this.af.auth.login();
+    //this.af.auth.login();
+    this.router.navigate(['/login']);
   }
 
   logout(){
